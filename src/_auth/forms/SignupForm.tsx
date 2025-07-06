@@ -35,7 +35,7 @@ const SignupForm = () => {
   }
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-col flex-center">
+      <div className="sm:w-420 flex-col flex-center pt-16">
         <img src="/assets/images/logo.svg" alt="Logo" />
         <h2 className="pt-5 h3-bold sm:pt-12">Create a new account</h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">
@@ -54,7 +54,7 @@ const SignupForm = () => {
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -66,12 +66,7 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="shad-input"
-                    {...field}
-                    placeholder="UserName"
-                  />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -85,12 +80,7 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    type="email"
-                    className="shad-input"
-                    {...field}
-                    placeholder="UserName"
-                  />
+                  <Input type="email" className="shad-input" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -104,12 +94,7 @@ const SignupForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input
-                    type="password"
-                    className="shad-input"
-                    {...field}
-                    placeholder="UserName"
-                  />
+                  <Input type="password" className="shad-input" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
