@@ -9,7 +9,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
+import { useUserContext } from "@/context/AuthContext";
+import { toast } from "sonner";
 import {
   useCreateUserAccount,
   useSignInAccount,
@@ -17,12 +18,12 @@ import {
 import { SignUpValidation } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { email } from "zod/v4-mini";
 
 const SignupForm = () => {
-  const { toast } = useToast();
+  const navigate = useNavigate();
+  const { checkAuthUser } = useUserContext();
   const { mutateAsync: createUserAccount, isPending: isCreatingUser } =
     useCreateUserAccount();
   const { mutateAsync: signInAccount, isPending: isSigningIn } =
@@ -43,19 +44,26 @@ const SignupForm = () => {
     const newUsers = await createUserAccount(values);
 
     if (!newUsers) {
-      toast({
-        title: "Sign Up Failed. Please try again.",
-      });
+      toast("Sign Up Failed. Please try again.");
     }
 
     const session = await signInAccount({
       email: values.email,
       password: values.password,
     });
+
+    console.log("session", session);
     if (!session) {
-      toast({
-        title: "Sign In Failed. Please try again.",
-      });
+      toast("Sign In Failed. Please try again.");
+    }
+
+    const isLoggedIn = await checkAuthUser();
+
+    if (isLoggedIn) {
+      form.reset();
+      navigate("/");
+    } else {
+      toast("Sign Up Failed. Please try again.");
     }
   }
   return (
