@@ -11,6 +11,7 @@ const LeftSidebar = () => {
   const navigate = useNavigate();
   const { user } = useUserContext();
   const { pathname } = useLocation();
+  console.log("pathname", pathname);
 
   useEffect(() => {
     if (isSuccess) navigate(0);
